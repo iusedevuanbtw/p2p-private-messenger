@@ -55,7 +55,7 @@ P2P Messenger VPN
 
 Одна команда:
 
-git clone https://github.com/iusedevuanbtw/p2p-private-messenger
+    git clone https://github.com/iusedevuanbtw/p2p-private-messenger
 
 Запуск:
 
