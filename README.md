@@ -47,22 +47,25 @@
 
 ## Установка
 
-git clone https://github.com/iusedevuanbtw/p2p-private-messenger
-cd p2p-private-messenger
-chmod +x setup.sh
-sudo ./setup.sh
+    git clone https://github.com/iusedevuanbtw/p2p-private-messenger
+    
+    
+    cd p2p-private-messenger
+    
+    
+    chmod +x setup.sh
+    
+    sudo ./setup.sh
 
 Запуск
-bash
 
-sudo p2pmsngr
+    sudo p2pmsngr
 
 Или:
-bash
 
-cd /opt/p2p_messenger_vpn
-source /opt/p2pvpn_env/bin/activate
-sudo python3 main.py
+    cd /opt/p2p_messenger_vpn
+    source /opt/p2pvpn_env/bin/activate
+    sudo python3 main.py
 
 Архитектура
 
