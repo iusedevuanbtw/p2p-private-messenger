@@ -55,7 +55,7 @@ P2P Messenger VPN
 
 Одна команда:
 
-curl -sSL https://raw.githubusercontent.com/username/p2p-private-messenger/main/setup.sh | sudo bash
+git clone https://github.com/iusedevuanbtw/p2p-private-messenger
 
 Запуск:
 
