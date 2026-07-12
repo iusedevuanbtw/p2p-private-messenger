@@ -1,85 +1,83 @@
-# P2P Messenger VPN
+P2P Messenger VPN
 
-Cross-platform peer-to-peer messenger with integrated VPN functionality.
+Кроссплатформенный P2P мессенджер со встроенным VPN.
+Описание
 
-## Description
+Децентрализованный инструмент для общения с интегрированной виртуальной частной сетью. Позволяет создавать комнаты и подключаться к ним через прямое TCP-соединение с парольной защитой. Встроенный VPN на базе TUN/TAP обеспечивает виртуальную локальную сеть.
+Возможности
 
-P2P Messenger VPN is a decentralized communication tool that combines instant messaging with virtual private network capabilities. It allows users to create or join chat rooms over direct TCP connections, with optional password protection and built-in TUN/TAP-based VPN for virtual local networking.
+    P2P обмен сообщениями по TCP
 
-## Features
+    VPN через TUN/TAP интерфейсы
 
-- Peer-to-peer messaging over TCP with room-based architecture
-- Integrated VPN via TUN/TAP virtual network interfaces
-- UDP multicast room discovery
-- SHA-256 password authentication for rooms
-- Private messaging between specific users
-- File transfer support
-- Real-time typing indicators
-- Desktop notifications and sound alerts
-- Automatic ping measurement with PONG response
-- Chat history logging
-- Nickname mention highlighting
-- Message and file transfer statistics
-- ANSI-colored terminal interface
+    Обнаружение комнат через UDP мультикаст
 
-## Commands
+    SHA-256 аутентификация
 
-| Command | Description |
-|---------|-------------|
-| /quit | Exit the chat room |
-| /nick name | Change display nickname |
-| /clear | Clear the terminal screen |
-| /dice | Generate random number 1-6 |
-| /ping | Measure round-trip latency |
-| /stats | Display message and file count |
-| /online | List connected peers |
-| /msgto nick text | Send private message to user |
-| /sendfile path | Send file to all room members |
+    Приватные сообщения
 
-## Requirements
+    Отправка файлов
 
-- Python 3.8 or higher
-- Linux: TUN/TAP kernel module, ip command
-- Windows: OpenVPN TAP driver
-- Root/administrator privileges for VPN functionality
+    Индикатор печати
 
-## Installation
+    Уведомления на рабочий стол
 
-### Linux
+    Замер задержки (пинг)
 
-git clone https://github.com/username/p2p-messenger-vpn.git
-cd p2p-messenger-vpn
-sudo bash setup.sh
+    История чата
 
-The installer will detect your shell, check for Python 3, create a virtual environment, install dependencies, and create a system alias.
+    Подсветка упоминаний
 
-Run with:
+    Статистика
+
+    Цветной интерфейс
+
+Команды
+Команда	Описание
+/quit	Выйти из чата
+/nick имя	Сменить никнейм
+/clear	Очистить экран
+/dice	Бросить кубик
+/ping	Замерить задержку
+/stats	Статистика
+/online	Список участников
+/msgto ник текст	Приватное сообщение
+/sendfile путь	Отправить файл
+Требования
+
+    Python 3.8+
+
+    Linux: модуль TUN/TAP, команда ip
+
+    Права root для VPN
+
+Установка
+
+Одна команда:
+
+curl -sSL https://raw.githubusercontent.com/username/p2p-private-messenger/main/setup.sh | sudo bash
+
+Запуск:
 
 sudo p2pmsngr
+Архитектура
 
-### Windows
+main.py — точка входа
+cli_menu.py — интерфейс
+messenger.py — TCP и аутентификация
+discovery.py — поиск комнат
+vpn.py — TUN/TAP интерфейс
+setup.sh — установщик
+run.sh — лаунчер
+Протокол
 
-Run setup.bat as Administrator, then execute C:\p2p_messenger_vpn\run.bat.
+Поиск комнат: UDP мультикаст 224.0.0.187:48879, хосты анонсируют комнаты каждые 2 секунды.
 
-## Architecture
+Подключение: клиент выбирает комнату, TCP соединение, отправка JSON с названием комнаты и SHA-256 хешем пароля.
 
-p2p_messenger_vpn/
-    main.py           Application entry point
-    cli_menu.py       Terminal user interface
-    messenger.py      TCP messaging and authentication
-    discovery.py      UDP multicast room scanner
-    vpn.py            TUN/TAP interface management
-    setup.sh          Linux installation script
-    setup.bat         Windows installation script
-    run.sh            Runtime launcher
-    requirements.txt  Python dependencies
+Типы сообщений: 1 — текст, 2 — файл, 3 — VPN пакет, 5 — приватное сообщение.
 
-## Protocol
+VPN: каждый участник создаёт TUN интерфейс с адресом 10.x.x.1/24, пакеты передаются внутри TCP.
+Лицензия
 
-Room Discovery: UDP multicast on 224.0.0.187:48879. Hosts broadcast room name, nickname, and password hash every 2 seconds.
-
-Connection: Client selects room, establishes TCP connection, sends authentication JSON with room name and SHA-256 password hash. Host validates and adds client to peer list.
-
-Message Types: Type 1 for text, Type 2 for file transfer, Type 3 for VPN packets, Type 5 for private messages.
-
-VPN: Each peer creates a TUN interface with a unique 10.x.x.1/24 address. VPN packets are encapsulated in TCP messages and broadcast to connected peers.
+MIT
